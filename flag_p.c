@@ -105,7 +105,7 @@ void idatzi_onena (struct info_param param, struct info_emaitzak *ONENA, char *f
 
 
   // azken sareta
-  sprintf (izena, "%s_s.emaitza", fsar);
+  sprintf (izena, "%s_p.emaitza", fsar);
   fd = fopen (izena, "w");
   fprintf (fd, "Tmin_hasi %1.1f  Tmax_hasi %1.1f  \n", param.t_kanpo, param.tmax_txip);
   fprintf (fd, "%d\t  %d \n", ZUT-2, ERR-2);
@@ -116,7 +116,7 @@ void idatzi_onena (struct info_param param, struct info_emaitzak *ONENA, char *f
   fclose (fd);
 
   // hasierako txip-sareta
-  sprintf (izena, "%s_s.txipak", fsar);
+  sprintf (izena, "%s_p.txipak", fsar);
   fd = fopen (izena, "w");
   fprintf (fd, "Tmin_txip %1.1f  Tmax_txip %1.1f  \n", param.t_kanpo, param.tmax_txip);
   fprintf (fd, "%d\t  %d \n", ZUT-2, ERR-2);
