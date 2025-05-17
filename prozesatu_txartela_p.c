@@ -89,26 +89,26 @@ void errenkadak_elkartrukatu_isend(struct info_param param, float *sareta) {
  
  
   MPI_Request reqs[4];
-  int req_count = 0;
+  int req_kont = 0;
 
   
   if (pid != 0) {
-      MPI_Irecv(&sareta[0], ZUT, MPI_FLOAT, pid - 1, 0, MPI_COMM_WORLD, &reqs[req_count++]); 
+      MPI_Irecv(&sareta[0], ZUT, MPI_FLOAT, pid - 1, 0, MPI_COMM_WORLD, &reqs[req_kont++]); 
   }
   if (pid != prk - 1) {
-      MPI_Irecv(&sareta[(err_kop + 1) * ZUT], ZUT, MPI_FLOAT, pid + 1, 1, MPI_COMM_WORLD, &reqs[req_count++]); 
+      MPI_Irecv(&sareta[(err_kop + 1) * ZUT], ZUT, MPI_FLOAT, pid + 1, 1, MPI_COMM_WORLD, &reqs[req_kont++]); 
   }
 
   
   if (pid != 0) {
-      MPI_Isend(&sareta[ZUT], ZUT, MPI_FLOAT, pid - 1, 1, MPI_COMM_WORLD, &reqs[req_count++]); 
+      MPI_Isend(&sareta[ZUT], ZUT, MPI_FLOAT, pid - 1, 1, MPI_COMM_WORLD, &reqs[req_kont++]); 
   }
   if (pid != prk - 1) {
-      MPI_Isend(&sareta[err_kop * ZUT], ZUT, MPI_FLOAT, pid + 1, 0, MPI_COMM_WORLD, &reqs[req_count++]); 
+      MPI_Isend(&sareta[err_kop * ZUT], ZUT, MPI_FLOAT, pid + 1, 0, MPI_COMM_WORLD, &reqs[req_kont++]); 
   }
 
   
-  MPI_Waitall(req_count, reqs, MPI_STATUSES_IGNORE);
+  MPI_Waitall(req_kont, reqs, MPI_STATUSES_IGNORE);
 }
 
 
